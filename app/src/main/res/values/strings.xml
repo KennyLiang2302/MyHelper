@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TutorMe</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="Message_fragment"> Message Fragment</string>
+    <string name="Calender_fragment"> Calender Fragment</string>
+    <string name="tutorme">TutorMe</string>
+    <string name="save">Save</string>
+    <string name="title">Title</string>
+    <string name="write_your_notes_here">Write your notes here</string>
+</resources>
