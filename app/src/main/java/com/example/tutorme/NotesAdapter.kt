@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,9 +24,10 @@ class NotesAdapter(private var noteList: MutableList<Notes>?,
 
     class ViewHolder internal constructor(noteView: View):
             RecyclerView.ViewHolder(noteView){
-        val layout: ConstraintLayout = noteView.findViewById(R.id.noteLayout)
-        val title: TextView = noteView.findViewById(R.id.title)
-        val detail: TextView = noteView.findViewById(R.id.detail)
+        val layout: CardView = noteView.findViewById(R.id.note_layout)
+        val subject: TextView = noteView.findViewById(R.id.subject)
+        val tutor: TextView = noteView.findViewById(R.id.tutor)
+        val date: TextView = noteView.findViewById(R.id.date)
 
 
     }
@@ -37,8 +39,9 @@ class NotesAdapter(private var noteList: MutableList<Notes>?,
     }
 
     override fun onBindViewHolder(holder: NotesAdapter.ViewHolder, position: Int) {
-        holder.title.text = noteList!![position].title
-        holder.detail.text = noteList!![position].detail
+        holder.subject.text = noteList!![position].subject
+        holder.tutor.text = noteList!![position].tutor
+        holder.date.text = noteList!![position].date
 
         holder.layout.setOnClickListener {
             mAdapterOnClickHandler.onClick(position)

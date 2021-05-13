@@ -49,8 +49,8 @@ class CalenderFragment() : Fragment(), NotesAdapter.AdapterOnClickHandler {
         layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
 
-        val notes1 = Notes("Title", "Detail")
-        val notes2 = Notes("Title2", "Detail2")
+        val notes1 = Notes("Math", "Paul Suh", "5/12/21")
+        val notes2 = Notes("Physics", "Kenny Liang", "5/15/21")
         var noteList: MutableList<Notes> = mutableListOf()
         noteList.add(notes1)
         noteList.add(notes2)

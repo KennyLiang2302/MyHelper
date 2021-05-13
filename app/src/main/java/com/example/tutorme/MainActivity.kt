@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 
+
 class MainActivity : AppCompatActivity() {
     lateinit var tutorButton: ImageButton
-    lateinit var messageButton: ImageButton
     lateinit var calendarButton: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,57 +16,69 @@ class MainActivity : AppCompatActivity() {
             this.supportActionBar!!.hide()
         } catch (e: NullPointerException) {
         }
+        val userID = intent.extras?.getInt("SenderID")
+        val session = intent.extras?.getString("session")
+        val user = intent.extras?.getString("user")
 
 
-
-        var list1: MutableList<String> = mutableListOf("math", "Chem")
-
-        val tutor1 = Tutors(
-                "Paul Suh", list1, "Cornell", 3.5, 5.0,
-                "Cornell University"
-        )
-
-
-        var tutorList:MutableList<Tutors> = mutableListOf()
-        tutorList.add(tutor1)
-
-
-
-
-        val fragmentManager = supportFragmentManager;
-        fragmentManager.beginTransaction().apply {
-            replace(R.id.Fragment, TutorsList())
-            addToBackStack(null)
-            commit()
-        }
-
-        tutorButton = findViewById(R.id.tutorButton)
-        tutorButton.setOnClickListener {
+        if (user == "student") {
+            val fragmentManager = supportFragmentManager;
             fragmentManager.beginTransaction().apply {
-                replace(R.id.Fragment, TutorsList())
+                TutorsList.newInstance(session)?.let { replace(R.id.Fragment, it) }
                 addToBackStack(null)
                 commit()
             }
-        }
 
-        calendarButton = findViewById(R.id.calenderButton)
-        calendarButton.setOnClickListener {
-            fragmentManager.beginTransaction().apply {
-                replace(R.id.Fragment, CalenderFragment())
-                addToBackStack(null)
-                commit()
+
+            tutorButton = findViewById(R.id.tutorButton)
+            tutorButton.setOnClickListener {
+                fragmentManager.beginTransaction().apply {
+                    TutorsList.newInstance(session)?.let { it1 -> replace(R.id.Fragment, it1) }
+                    addToBackStack(null)
+                    commit()
+                }
+            }
+
+            calendarButton = findViewById(R.id.calenderButton)
+            calendarButton.setOnClickListener {
+                fragmentManager.beginTransaction().apply {
+                    replace(R.id.Fragment, CalenderFragment())
+                    addToBackStack(null)
+                    commit()
+                }
             }
         }
 
-        messageButton = findViewById(R.id.messageButton)
-        messageButton.setOnClickListener {
+        if (user == "tutor ") {
+            val fragmentManager = supportFragmentManager;
             fragmentManager.beginTransaction().apply {
-                replace(R.id.Fragment, MessageFragment())
+                InvitesList.newInstance(userID)?.let { replace(R.id.Fragment, it) }
                 addToBackStack(null)
                 commit()
             }
+
+
+            tutorButton = findViewById(R.id.tutorButton)
+            tutorButton.setOnClickListener {
+                fragmentManager.beginTransaction().apply {
+                    InvitesList.newInstance(userID)?.let { it1 -> replace(R.id.Fragment, it1) }
+                    addToBackStack(null)
+                    commit()
+                }
+            }
+
+            calendarButton = findViewById(R.id.calenderButton)
+            calendarButton.setOnClickListener {
+                fragmentManager.beginTransaction().apply {
+                    replace(R.id.Fragment, CalenderFragment())
+                    addToBackStack(null)
+                    commit()
+                }
+            }
+
         }
 
 
     }
 }
+
