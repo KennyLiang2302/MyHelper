@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/edit"
+    android:padding="8dp"
+    tools:context=".ChoiceActivity">
+
+
+
+    <TextView
+        android:id="@+id/choiceMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Are You A Tutor or Student?"
+        android:textSize="30sp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="50dp"
+        android:padding="8dp"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/studentButton"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:background="@drawable/login_edit_background"
+        app:backgroundTint="@color/white"
+        app:layout_constraintStart_toStartOf="@id/choiceMessage"
+        app:layout_constraintTop_toBottomOf="@id/choiceMessage"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="40dp"
+        android:padding="8dp"
+        android:text="Student"
+        android:textAllCaps="false"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@id/tutorButton"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:background="@drawable/login_edit_background"
+        app:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/choiceMessage"
+        app:layout_constraintTop_toBottomOf="@id/choiceMessage"
+        android:layout_marginTop="80dp"
+        android:text="Tutor"
+        android:textAllCaps="false"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:layout_marginRight="40dp"/>
+
+    <TextView
+        android:id="@+id/descriptionMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_a_description_about_yourself"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:layout_marginBottom="350dp"
+        android:textStyle="bold"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/descriptionMessage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/login_edit_background"
+        android:backgroundTint="@color/white"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="20dp"
+
+        android:padding="8dp"/>
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="90dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/button_background"
+        android:text="Next"
+        android:textAllCaps="false"
+        app:backgroundTint="#1D3BE4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/edit"
+    tools:context=".SubjectsActivity">
+
+    <TextView
+        android:id="@+id/subjectsMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Which Subject Are You Interested to Learn/Teach? "
+        android:textSize="30sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="50dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:gravity="center_horizontal" />
+    <Button
+        android:id="@+id/mathButton"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:background="@drawable/login_edit_background"
+        app:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subjectsMessage"
+        android:layout_marginTop="40dp"
+        android:text="Math"
+        android:textAllCaps="false"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/physicsButton"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:background="@drawable/login_edit_background"
+        app:backgroundTint="@color/white"
+        app:layout_constraintStart_toStartOf="@id/mathButton"
+        app:layout_constraintTop_toBottomOf="@id/mathButton"
+        android:layout_marginTop="20dp"
+        android:text="Physics"
+        android:textAllCaps="false"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/CSButton"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:background="@drawable/login_edit_background"
+        app:backgroundTint="@color/white"
+        app:layout_constraintStart_toStartOf="@id/physicsButton"
+        app:layout_constraintTop_toBottomOf="@id/physicsButton"
+        android:layout_marginTop="20dp"
+        android:text="Computer Science"
+        android:textAllCaps="false"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/historyButton"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:background="@drawable/login_edit_background"
+        app:backgroundTint="@color/white"
+        app:layout_constraintStart_toStartOf="@id/CSButton"
+        app:layout_constraintTop_toBottomOf="@id/CSButton"
+        android:layout_marginTop="20dp"
+        android:text="History"
+        android:textAllCaps="false"
+        android:textColor="@color/black"/>
+    <Button
+        android:id="@+id/chemistryButton"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:background="@drawable/login_edit_background"
+        app:backgroundTint="@color/white"
+        app:layout_constraintStart_toStartOf="@id/CSButton"
+        app:layout_constraintEnd_toEndOf="@id/historyButton"
+        app:layout_constraintTop_toBottomOf="@id/historyButton"
+        android:layout_marginTop="20dp"
+        android:text="Chemistry"
+        android:textAllCaps="false"
+        android:textColor="@color/black"/>
+
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="90dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_background"
+        android:text="Next"
+        android:textAllCaps="false"
+        app:backgroundTint="#1D3BE4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
