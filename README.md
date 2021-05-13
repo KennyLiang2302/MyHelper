@@ -4,7 +4,7 @@ Enabling Cornell students to learn from their peers.
 ## Link to Backend Github Repo:
 https://github.com/kidzegeye/my-helper
 
-Android Requirements:
+## Android Requirements:
 The app has networking (GET, POST request), both recycler views and fragments, and 8 unique screens.
 
 ## App Description:
