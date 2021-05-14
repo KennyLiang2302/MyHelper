@@ -1,8 +1,8 @@
 package com.example.tutorme
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,9 +32,9 @@ private const val ARG_PARAM2 = "param2"
 
 private val client = OkHttpClient()
 private lateinit var layoutManager: LinearLayoutManager
-private lateinit var adapter: TutorsAdapter
+private lateinit var adapter: InviteAdapter
 private lateinit var recyclerView: RecyclerView
-class InvitesList : Fragment()  {
+class InvitesList : Fragment(), InviteAdapter.AdapterOnClickHandler {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -56,8 +56,10 @@ class InvitesList : Fragment()  {
         val rootView: View = inflater.inflate(R.layout.fragment_invites_list, container, false)
         CoroutineScope(Dispatchers.Main).launch {
 
+            val id = arguments!!.get("userID")
+
             val request = Request.Builder()
-                .url("https://my-helper-appdev.herokuapp.com/api/users/")
+                .url("https://my-helper-appdev.herokuapp.com/api/user/invites/$id/")
                 .build()
             withContext(Dispatchers.IO) {
 
@@ -68,7 +70,7 @@ class InvitesList : Fragment()  {
                         .add(KotlinJsonAdapterFactory())
                         .build()
 
-                    val userAdapter = moshi.adapter(UserList::class.java)
+                    val userAdapter = moshi.adapter(InviteList::class.java)
 
 
                     val users = userAdapter.fromJson(response.body!!.string())
@@ -78,22 +80,26 @@ class InvitesList : Fragment()  {
                         val context: Context? = context
 
                         layoutManager = LinearLayoutManager(context)
-                        recyclerView = rootView.findViewById(R.id.recyclerView)
+                        recyclerView = rootView.findViewById(R.id.recyclerViewInvites)
                         recyclerView.layoutManager = layoutManager
 
 
-//                        var inviteList = listOf<InviteData>()
-//                        for (user in users!!.data){
-//                            if (user.id == arguments!!.get("userID")){
-//                                for (invite in user.tutor[0].invites) {
-//                                    val inviteData = InviteData(user.name, user.tutor[0].subjects[0].toString())
-//                                     inviteList
-//                                }
-//                            }
-//                        }
+                        val session = arguments!!.getString("session")
+                        var inviteList = mutableListOf<InviteData>()
+                        for (invite in users!!.data){
+                            val subject = findSubjectID(invite.subject_id)
+                            val inviteData = session?.let {
+                                InviteData(invite.sender[0].name, subject, invite.id,
+                                    it
+                                )
+                            }
+                            if (inviteData != null) {
+                                inviteList.add(inviteData)
+                            }
+                        }
 
-//                        adapter = InviteAdapter(inviteList, this@InvitesList)
-//                        recyclerView.adapter = adapter
+                        adapter = InviteAdapter(inviteList, this@InvitesList)
+                        recyclerView.adapter = adapter
                     }
 
                 }
@@ -123,14 +129,32 @@ class InvitesList : Fragment()  {
                 }
             }
 
-        fun newInstance(userID: Int?): TutorsList? {
+        fun newInstance(userID: Int?, session: String): InvitesList? {
             val args = Bundle()
             if (userID != null) {
                 args.putInt("userID", userID)
+
             }
-            val f = TutorsList()
+            args.putString("session", session)
+            val f = InvitesList()
             f.setArguments(args)
             return f
         }
     }
+
+    private fun findSubjectID(subjectID: Int): String {
+        if (subjectID == 1){return "History"}
+        if (subjectID == 2){return "Math"}
+        if (subjectID == 3){return "Computer Science"}
+        if (subjectID == 4){return "Physics"}
+        return "Chemistry"
+    }
+
+    override fun onClick(position: Int, inviteList: List<InviteData>) {
+        val intent = Intent(context, AcceptInvite::class.java)
+        intent.putExtra("inviteID", inviteList[position].invite_id)
+        intent.putExtra("session",  inviteList[position].session)
+        startActivity(intent)
+    }
+
 }

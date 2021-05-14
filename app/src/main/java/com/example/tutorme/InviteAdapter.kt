@@ -8,19 +8,18 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
 class InviteAdapter(private var inviteList: List<InviteData>,
-                    private val mAdapterOnClickHandler: AdapterOnClickHandler
+                    private val mAdapterOnClickHandler: InvitesList
 )
     : RecyclerView.Adapter<InviteAdapter.ViewHolder>() {
     interface AdapterOnClickHandler {
         // you can define the parameters to be what you need
-        fun onClick(position: Int, tutorList: List<InviteData>)
+        fun onClick(position: Int, inviteList: List<InviteData>)
     }
 
     class ViewHolder internal constructor(invitesView: View) :
         RecyclerView.ViewHolder(invitesView) {
         val layout: CardView = invitesView.findViewById(R.id.invite_layout)
         val student: TextView = invitesView.findViewById(R.id.student)
-        val date: TextView = invitesView.findViewById(R.id.date)
         val subject: TextView = invitesView.findViewById(R.id.subject)
 
 
@@ -35,7 +34,6 @@ class InviteAdapter(private var inviteList: List<InviteData>,
     override fun onBindViewHolder(holder: InviteAdapter.ViewHolder, position: Int) {
         holder.student.text = inviteList[position].student
         holder.subject.text = inviteList[position].subject
-        holder.date.text = inviteList[position].toString()
 
         holder.layout.setOnClickListener {
             mAdapterOnClickHandler.onClick(position, inviteList)

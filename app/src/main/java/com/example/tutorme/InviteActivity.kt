@@ -83,6 +83,7 @@ class InviteActivity : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("user", userType)
+            intent.putExtra("session", session)
             startActivity(intent)
 
 

@@ -1,6 +1,7 @@
 package com.example.tutorme
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 
@@ -19,9 +20,12 @@ class MainActivity : AppCompatActivity() {
         val userID = intent.extras?.getInt("SenderID")
         val session = intent.extras?.getString("session")
         val user = intent.extras?.getString("user")
-
+        if (user != null) {
+            Log.d("user", user)
+        }
 
         if (user == "student") {
+            Log.d("studnet", "student")
             val fragmentManager = supportFragmentManager;
             fragmentManager.beginTransaction().apply {
                 TutorsList.newInstance(session)?.let { replace(R.id.Fragment, it) }
@@ -49,10 +53,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        if (user == "tutor ") {
+        if (user == "tutor") {
+
+            Log.d("hi", "hi")
+            Log.d("userID", userID.toString())
+
             val fragmentManager = supportFragmentManager;
             fragmentManager.beginTransaction().apply {
-                InvitesList.newInstance(userID)?.let { replace(R.id.Fragment, it) }
+                if (session != null) {
+                    InvitesList.newInstance(userID, session)?.let { replace(R.id.Fragment, it) }
+                }
                 addToBackStack(null)
                 commit()
             }
@@ -61,7 +71,9 @@ class MainActivity : AppCompatActivity() {
             tutorButton = findViewById(R.id.tutorButton)
             tutorButton.setOnClickListener {
                 fragmentManager.beginTransaction().apply {
-                    InvitesList.newInstance(userID)?.let { it1 -> replace(R.id.Fragment, it1) }
+                    if (session != null) {
+                        InvitesList.newInstance(userID, session)?.let { it1 -> replace(R.id.Fragment, it1) }
+                    }
                     addToBackStack(null)
                     commit()
                 }

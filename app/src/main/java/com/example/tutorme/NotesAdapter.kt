@@ -26,8 +26,8 @@ class NotesAdapter(private var noteList: MutableList<Notes>?,
             RecyclerView.ViewHolder(noteView){
         val layout: CardView = noteView.findViewById(R.id.note_layout)
         val subject: TextView = noteView.findViewById(R.id.subject)
-        val tutor: TextView = noteView.findViewById(R.id.tutor)
-        val date: TextView = noteView.findViewById(R.id.date)
+        val name: TextView = noteView.findViewById(R.id.tutor)
+        val time: TextView = noteView.findViewById(R.id.date)
 
 
     }
@@ -40,8 +40,8 @@ class NotesAdapter(private var noteList: MutableList<Notes>?,
 
     override fun onBindViewHolder(holder: NotesAdapter.ViewHolder, position: Int) {
         holder.subject.text = noteList!![position].subject
-        holder.tutor.text = noteList!![position].tutor
-        holder.date.text = noteList!![position].date
+        holder.name.text = noteList!![position].name
+        holder.time.text = noteList!![position].time
 
         holder.layout.setOnClickListener {
             mAdapterOnClickHandler.onClick(position)
