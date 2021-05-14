@@ -65,20 +65,9 @@ class AcceptInvite : AppCompatActivity() {
 
         client.newCall(requestPost).execute().use {
             if (!it.isSuccessful) throw IOException("Unexpected code $it")
-
-
-            val moshi = Moshi.Builder()
-                .add(KotlinJsonAdapterFactory())
-                .build()
-
-            val userAdapter = moshi.adapter(Session::class.java)
-
-
-            val user = userAdapter.fromJson(it.body!!.string())
-            val intent = Intent(this, MainActivity::class.java)
-//            intent.putExtra("session", user)
-//
-
+            intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("inviteID", inviteID)
+            startActivity(intent)
 
     }
 }}

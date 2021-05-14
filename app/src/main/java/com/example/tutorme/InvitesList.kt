@@ -97,6 +97,19 @@ class InvitesList : Fragment(), InviteAdapter.AdapterOnClickHandler {
                                 inviteList.add(inviteData)
                             }
                         }
+                        val inviteID = arguments?.getInt("inviteID")
+                        if (inviteID != null){
+                            var inviteNumber = -1
+                            for (invite in inviteList){
+                                inviteNumber += 1
+                                if (inviteID == invite.invite_id)
+                                    inviteList.removeAt(inviteNumber)
+
+                            }
+                        }
+
+
+
 
                         adapter = InviteAdapter(inviteList, this@InvitesList)
                         recyclerView.adapter = adapter
@@ -129,12 +142,14 @@ class InvitesList : Fragment(), InviteAdapter.AdapterOnClickHandler {
                 }
             }
 
-        fun newInstance(userID: Int?, session: String): InvitesList? {
+        fun newInstance(userID: Int?, session: String, inviteID: Int): InvitesList? {
             val args = Bundle()
             if (userID != null) {
                 args.putInt("userID", userID)
 
+
             }
+            args.putInt("inviteID", inviteID)
             args.putString("session", session)
             val f = InvitesList()
             f.setArguments(args)

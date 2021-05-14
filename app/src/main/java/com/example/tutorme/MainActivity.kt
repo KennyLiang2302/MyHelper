@@ -55,13 +55,14 @@ class MainActivity : AppCompatActivity() {
 
         if (user == "tutor") {
 
-            Log.d("hi", "hi")
-            Log.d("userID", userID.toString())
+            val inviteID = intent.extras?.getInt("inviteID")
 
             val fragmentManager = supportFragmentManager;
             fragmentManager.beginTransaction().apply {
                 if (session != null) {
-                    InvitesList.newInstance(userID, session)?.let { replace(R.id.Fragment, it) }
+                    if (inviteID != null) {
+                        InvitesList.newInstance(userID, session, inviteID)?.let { replace(R.id.Fragment, it) }
+                    }
                 }
                 addToBackStack(null)
                 commit()
@@ -72,7 +73,9 @@ class MainActivity : AppCompatActivity() {
             tutorButton.setOnClickListener {
                 fragmentManager.beginTransaction().apply {
                     if (session != null) {
-                        InvitesList.newInstance(userID, session)?.let { it1 -> replace(R.id.Fragment, it1) }
+                        if (inviteID != null) {
+                            InvitesList.newInstance(userID, session, inviteID)?.let { it1 -> replace(R.id.Fragment, it1) }
+                        }
                     }
                     addToBackStack(null)
                     commit()
